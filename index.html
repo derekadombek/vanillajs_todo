@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    </head>
+    <body class="container">
+        <header class="logo">
+            <h1 class="headline">todo</h1>
+        </header>
+        <div class="main">
+            <form id="todoForm">
+                <input type="text" id="todoInput" placeholder="New Task...">
+                <button type="submit"><i class="fas fa-plus-square"></i></button>
+            </form>
+            <div class="todoList">
+                <ul id="todoList">
+                </ul>
+                <a class="clearAll" id="clearAll">Clear All</a>
+            </div>
+        </div>
+        <script src="https://chancejs.com/chance.min.js"></script>
+        <script src="script.js" async defer></script>
+    </body>
+</html>
