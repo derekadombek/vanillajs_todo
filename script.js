@@ -5,21 +5,25 @@ function saveTodo(e) {
     let todoInput = document.getElementById('todoInput').value;
     let todoId = chance.guid();
     let todoStatus = '<i class="far fa-square"></i>';
-
-    let todo = {
-        id: todoId,
-        todo: todoInput,
-        status: todoStatus,
-    }
-
-    if (localStorage.getItem('todos') == null) {
-        let todos = [];
-        todos.push(todo);
-        localStorage.setItem('todos', JSON.stringify(todos));
+    
+    if (todoInput != '') {
+        let todo = {
+            id: todoId,
+            todo: todoInput,
+            status: todoStatus,
+        }
+    
+        if (localStorage.getItem('todos') == null) {
+            let todos = [];
+            todos.push(todo);
+            localStorage.setItem('todos', JSON.stringify(todos));
+        } else {
+            let todos = JSON.parse(localStorage.getItem('todos'));
+            todos.push(todo)
+            localStorage.setItem('todos', JSON.stringify(todos))
+        }
     } else {
-        let todos = JSON.parse(localStorage.getItem('todos'));
-        todos.push(todo)
-        localStorage.setItem('todos', JSON.stringify(todos))
+        alert('Must type something')
     }
 
     document.getElementById('todoForm').reset();
