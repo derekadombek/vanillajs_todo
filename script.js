@@ -1,4 +1,5 @@
 document.getElementById('todoForm').addEventListener('submit', saveTodo);
+window.onload = fetchTodos;
 
 function saveTodo(e) {
     let todoInput = document.getElementById('todoInput').value;
@@ -8,7 +9,7 @@ function saveTodo(e) {
     let todo = {
         id: todoId,
         todo: todoInput,
-        status: todoStatus
+        status: todoStatus,
     }
 
     if (localStorage.getItem('todos') == null) {
@@ -30,17 +31,40 @@ function saveTodo(e) {
 
 function checkTodoStatus(id) {
     let todos = JSON.parse(localStorage.getItem('todos'));
+    let statusChecked = '<i class="far fa-check-square"></i>';
+    let statusEmpty = '<i class="far fa-square"></i>'
 
     for (i=0;i<todos.length;i++) {
-        if (todos[i].id == id) {
-            todos[i].status = '<i class="far fa-check-square"></i>';
+        if (todos[i].id == id && todos[i].status == statusEmpty) {
+            todos[i].status = statusChecked;
+        } else if (todos[i].id == id && todos[i].status == statusChecked) {
+            todos[i].status = statusEmpty;
         }
     }
 
     localStorage.setItem('todos', JSON.stringify(todos));
+    fetchTodos();
+}
+
+function deleteOneTodo(id) {
+    let todos = JSON.parse(localStorage.getItem('todos'));
+    
+    for(i=0;i<todos.length;i++) {
+        if (todos[i].id == id) {
+            todos.splice(i, 1);
+        }
+    }
+
+    localStorage.setItem('todos', JSON.stringify(todos));
+    fetchTodos();
+}
+
+function clearAllTodos() {
+    let todos = JSON.parse(localStorage.getItem('todos'));
+    todos.splice(todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
 
     fetchTodos();
-
 }
 
 
@@ -56,7 +80,7 @@ function fetchTodos() {
         let status = todos[i].status;
 
         todoList.innerHTML +=   '<div>'+
-                                '<h1 class="todo-item">'+ todo + '</h1><button><i class="fa fa-trash"></i></button>'+
+                                '<h1 class="todo-item">'+ todo + '</h1><button onclick="deleteOneTodo(\''+id+'\')"><i class="fa fa-trash"></i></button>'+
                                 '<a href="#" onclick="checkTodoStatus(\''+id+'\')">'+status+'</a>'+
                                 '</div>';
     }
